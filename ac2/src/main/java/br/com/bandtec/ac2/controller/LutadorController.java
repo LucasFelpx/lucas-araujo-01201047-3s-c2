@@ -40,7 +40,9 @@ public class LutadorController {
             return ResponseEntity.status(404).build();
 
         Lutador lutador = repository.getOne(id);
-        if (!lutador.concentrar()){
+        Boolean concetrado = lutador.concentrar();
+        repository.save(lutador);
+        if (!concetrado){
             return ResponseEntity.status(400).body("Lutador já se concentrou 3 vezes!");
         }else
             return  ResponseEntity.status(200).build();
